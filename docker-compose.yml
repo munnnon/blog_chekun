@@ -3,7 +3,7 @@ version: '3'
 services:
   apache:
     build: .docker/apache
-    container_name: symfony_apache
+    container_name: symfony_apache_blog
     ports:
       - "8000:80"
     volumes:
@@ -16,7 +16,7 @@ services:
     image: mysql:8.3
     ports:
       - "3307:3306"
-    container_name: symfony_mysql
+    container_name: symfony_mysql_blog
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: symfony
@@ -27,7 +27,7 @@ services:
     image: mysql:8.3
     ports:
       - "3308:3306"
-    container_name: symfony_mysql_test
+    container_name: symfony_mysql_blog_test
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: symfony_test
@@ -36,17 +36,17 @@ services:
 
   php:
     build: .docker/php
-    container_name: symfony_php
+    container_name: symfony_php_blog
     volumes:
       - ./app:/home/wwwroot/app
     environment:
-      - maildev_host=symfony_maildev
+      - maildev_host=symfony_maildev_blog
     depends_on:
       - maildev
       - mysql
 
   maildev:
     image: djfarrelly/maildev
-    container_name: symfony_maildev
+    container_name: symfony_maildev_blog
     ports:
       - "8001:80"

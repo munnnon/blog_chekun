@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.category_details'|trans({'%id%': category.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.category_details'|trans({'%id%': category.id|default('')}) }}</h1>
+    {% if category is defined %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label.id'|trans }}</dt>
+            <dd>{{ category.id }}</dd>
+            <dt>{{ 'label.category.name'|trans }}</dt>
+            <dd>{{ category.name }}</dd>
+        </dl>
+
+        <h2>{{ 'title.posts_in_category'|trans }}</h2>
+        {% if posts|length %}
+            <ul>
+                {% for post in posts %}
+                    <li>
+                        <a href="{{ path('post_show', {'id': post.id}) }}">{{ post.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>{{ 'message.no_posts_in_category'|trans }}</p>
+        {% endif %}
+
+        <p>
+            <a href="{{ path('category_index') }}" title="{{ 'action.back_to_list'|trans }}">
+                {{ 'action.back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>{{ 'message.record_not_found'|trans }}</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,60 @@
+<?php
+/**
+ * User Fixtures.
+ */
+namespace App\DataFixtures;
+
+use App\Entity\Enum\UserRole;
+use App\Entity\User;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+/**
+ * Class User Fixtures.
+ */
+class UserFixtures extends AbstractBaseFixtures
+{
+    /**
+     * @param UserPasswordHasherInterface $passwordHasher Password hasher
+     */
+    public function __construct(private readonly UserPasswordHasherInterface $passwordHasher)
+    {
+    }
+
+    /**
+     * Load data.
+     */
+    public function loadData(): void
+    {
+        $this->createMany(10, 'users', function (int $i) {
+            $user = new User();
+            $user->setEmail(sprintf('user%d@example.com', $i));
+            $user->setRoles([UserRole::ROLE_USER->value]);
+            $user->setPassword(
+                $this->passwordHasher->hashPassword(
+                    $user,
+                    'user1234'
+                )
+            );
+            $user->setNickname($this->faker->userName);
+
+            return $user;
+        });
+
+        $this->createMany(3, 'admins', function (int $i) {
+            $user = new User();
+            $user->setEmail(sprintf('admin%d@example.com', $i));
+            $user->setRoles([UserRole::ROLE_USER->value, UserRole::ROLE_ADMIN->value]);
+            $user->setNickname(sprintf('admin%d', $i));
+            $user->setPassword(
+                $this->passwordHasher->hashPassword(
+                    $user,
+                    'admin1234'
+                )
+            );
+
+            return $user;
+        });
+
+        $this->manager->flush();
+    }
+}

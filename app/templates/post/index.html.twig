@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'title.post_list'|trans }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'title.post_list'|trans }}</h1>
+    {% if pagination is defined and pagination.items|length %}
+
+        <a href="{{ path('post_create') }}" class="btn btn-primary" title="{{ 'action.create'|trans }}">
+            {{ 'action.create'|trans }}
+        </a>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+        <div class="row">
+            {% for post in pagination.items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'post_id') }}: {{ post.id }}</strong>
+                            <h5>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'post.title') }}: {{ post.title }}</h5>
+                            <p>{{ knp_pagination_sortable(pagination, 'label.category.name'|trans, 'category.name') }}: {{ post.category.name }}</p>
+                        </div>
+                        <div class="card-body">
+                            <p>{{ post.content }}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'post.createdAt') }}: {{ post.createdAt|format_date('long') }}</p>
+                            <p>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'post.updatedAt') }}: {{ post.updatedAt|format_date('long') }}</p>
+                            <a href="{{ path('post_show', {id: post.id}) }}" class="btn btn-primary" title="{{ 'action.view'|trans }}">
+                                {{ 'action.view'|trans }}
+                            </a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <form action="{{ path('post_edit', {id: post.id}) }}" method="get" style="display: inline-block;">
+                                <button class="btn btn-primary">{{ 'action.edit'|trans }}</button>
+                            </form>
+                            <div>
+                                <a href="{{ path('post_delete', {id: post.id}) }}" class="btn btn-danger" {{ 'action.delete'|trans }}>{{ 'action.delete'|trans }}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="navigation text-center">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    {% else %}
+        <p>
+            {% include 'default/_single_alert_message.html.twig' with {
+                type: 'warning',
+                message: 'message.empty_list'|trans
+            } %}
+        </p>
+    {% endif %}
+{% endblock %}

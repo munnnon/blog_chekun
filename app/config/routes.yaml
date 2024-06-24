@@ -1,0 +1,33 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+post_index:
+    path: /post
+    controller: App\Controller\PostController::index
+    methods: GET
+
+post_show:
+    path: /post/{id}
+    controller: App\Controller\PostController::show
+    requirements:
+        id: \d+
+    methods: GET
+
+post_create:
+    path: /post/create
+    controller: App\Controller\PostController::create
+    methods: GET|POST
+
+post_edit:
+    path: /post/{id}/edit
+    controller: App\Controller\PostController::edit
+    requirements:
+        id: \d+
+    methods: GET|PUT
+
+comment_create:
+    path: /comment/create/{post}
+    controller: App\Controller\CommentController::create
+    methods: GET|POST
