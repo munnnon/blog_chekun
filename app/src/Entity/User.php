@@ -32,7 +32,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * Email.
      */
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\Type('string')]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 180)]
     #[Assert\Email]
     private ?string $email;
 
@@ -47,14 +49,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Password.
      */
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Type('string')]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $password;
 
     /**
      * Nickname.
      */
     #[ORM\Column(length: 64)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 64)]
     private ?string $nickname = null;
 
     /**
@@ -96,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->id;
     }
 
     /**
@@ -106,7 +113,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->nickname;
     }
 
     /**

@@ -26,17 +26,13 @@
                 <source>message.record_not_found</source>
                 <target>Nie znaleziono.</target>
             </trans-unit>
-            <trans-unit id="title.record_list">
-                <source>title.record_list</source>
-                <target>Rekordy listy</target>
-            </trans-unit>
-            <trans-unit id="title.record_view">
-                <source>title.record_view</source>
-                <target>Zawartość rekordu #%id%</target>
-            </trans-unit>
             <trans-unit id="title.post_list">
                 <source>title.post_list</source>
                 <target>Lista postów</target>
+            </trans-unit>
+            <trans-unit id="title.post_edit">
+                <source>title.post_edit</source>
+                <target>Edycja posta</target>
             </trans-unit>
             <trans-unit id="action_logout">
                 <source>action_logout</source>
@@ -221,6 +217,11 @@
             <trans-unit id="action.post_list">
                 <source>action.post_list</source>
                 <target> Lista postów </target>
+            </trans-unit>
+
+            <trans-unit id="message.something_went_wrong">
+                <source>message.something_went_wrong</source>
+                <target> Coś poszło nie tak...</target>
             </trans-unit>
         </body>
     </file>

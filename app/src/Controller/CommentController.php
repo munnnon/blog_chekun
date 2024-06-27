@@ -79,6 +79,13 @@ class CommentController extends AbstractController
             return $this->redirectToRoute('post_show', ['id' => $post->getId()]);
         }
 
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('message.something_went_wrong')
+            );
+        }
+
         $comments = $this->commentRepository->findBy(['post' => $post]);
 
         return $this->render('comment/create.html.twig', [

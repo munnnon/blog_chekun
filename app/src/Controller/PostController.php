@@ -12,6 +12,7 @@ use App\Repository\CommentRepository;
 use App\Service\PostServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
@@ -112,6 +113,12 @@ class PostController extends AbstractController
 
             return $this->redirectToRoute('post_index');
         }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('message.something_went_wrong')
+            );
+        }
 
         return $this->render(
             'post/create.html.twig',
@@ -141,15 +148,39 @@ class PostController extends AbstractController
         );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->postService->savePost($post);
+        if ($form->isSubmitted()) {
+            if (!$form->isValid()) {
+                $this->addFlash(
+                    'error',
+                    $this->translator->trans('message.something_went_wrong')
+                );
+            } else {
+                $submittedData = $form->getData();
+                if (null === $submittedData->getTitle()) {
+                    $submittedData->setTitle($post->getTitle());
+                }
+                if (null === $submittedData->getContent()) {
+                    $submittedData->setContent($post->getContent());
+                }
+                if (null === $submittedData->getCategoryId()) {
+                    $submittedData->setCategoryId($post->getCategory()->getId());
+                }
 
+                $this->postService->savePost($submittedData);
+
+                $this->addFlash(
+                    'success',
+                    $this->translator->trans('message.updated_successfully')
+                );
+
+                return $this->redirectToRoute('post_index');
+            }
+        }
+        if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash(
-                'success',
-                $this->translator->trans('message.updated_successfully')
+                'error',
+                $this->translator->trans('message.something_went_wrong')
             );
-
-            return $this->redirectToRoute('post_index');
         }
 
         return $this->render(
@@ -160,6 +191,7 @@ class PostController extends AbstractController
             ]
         );
     }
+
 
     /**
      * Delete action.

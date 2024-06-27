@@ -50,6 +50,7 @@ class Comment
      */
     #[ORM\ManyToOne(targetEntity: Post::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Assert\NotBlank]
     private ?Post $post = null;
 
     /**
@@ -57,18 +58,25 @@ class Comment
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
     #[ORM\JoinColumn(nullable: true)]
+    #[Assert\NotBlank]
     private ?user $user = null;
 
     /**
      * Nickname.
      */
     #[ORM\Column(length: 64, nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 64)]
     private ?string $nickname = null;
 
     /**
      * Email.
      */
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 64)]
     private ?string $email = null;
 
     /**

@@ -103,6 +103,12 @@ class CategoryController extends AbstractController
 
             return $this->redirectToRoute('category_index');
         }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('message.something_went_wrong')
+            );
+        }
 
         return $this->render(
             'category/create.html.twig',
@@ -135,17 +141,36 @@ class CategoryController extends AbstractController
                 'action' => $this->generateUrl('category_edit', ['id' => $category->getId()]),
             ]
         );
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->categoryService->save($category);
+        if ($form->isSubmitted()) {
+            if (!$form->isValid()) {
+                $this->addFlash(
+                    'error',
+                    $this->translator->trans('message.something_went_wrong')
+                );
+            } else {
+                $submittedData = $form->getData();
+                if (null === $submittedData->getName()) {
+                    $submittedData->setName($category->getName());
+                }
+                $this->categoryService->save($category);
 
+                $this->addFlash(
+                    'success',
+                    $this->translator->trans('message.updated_successfully')
+                );
+
+                return $this->redirectToRoute('category_index');
+            }
+        }
+
+        if ($form->isSubmitted() && $form->isEmpty()) {
             $this->addFlash(
-                'success',
-                $this->translator->trans('message.updated_successfully')
+                'error',
+                $this->translator->trans('message.something_went_wrong')
             );
-
-            return $this->redirectToRoute('category_index');
         }
 
         return $this->render(

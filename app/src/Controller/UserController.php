@@ -95,6 +95,12 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('post_index');
         }
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash(
+                'error',
+                $this->translator->trans('message.something_went_wrong')
+            );
+        }
 
         return $this->render('user/change_password.html.twig', [
             'form' => $form->createView(),
@@ -125,15 +131,35 @@ class UserController extends AbstractController
         $form = $this->createForm(EditProfileType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
+        if ($form->isSubmitted()) {
+            if (!$form->isValid()) {
+                $this->addFlash(
+                    'error',
+                    $this->translator->trans('message.something_went_wrong')
+                );
+            } else {
+                $submittedData = $form->getData();
+                if (null === $submittedData->getNickname()) {
+                    $submittedData->setNickname($user->getNickname());
+                }
+                if (null === $submittedData->getEmail()) {
+                    $submittedData->setEmail($user->getEmail());
+                }
+                $em->flush();
 
+                $this->addFlash(
+                    'success',
+                    $this->translator->trans('message.updated_successfully')
+                );
+
+                return $this->redirectToRoute('post_index');
+            }
+        }
+        if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash(
-                'success',
-                $this->translator->trans('message.updated_successfully')
+                'error',
+                $this->translator->trans('message.something_went_wrong')
             );
-
-            return $this->redirectToRoute('post_index');
         }
 
         return $this->render('user/edit.html.twig', [
