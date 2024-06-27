@@ -43,10 +43,10 @@ class EditProfileType extends AbstractType
          */
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => 'label.email',
             ])
             ->add('nickname', TextType::class, [
-                'label' => 'Nickname',
+                'label' => 'label.nickname',
             ]);
     }
 

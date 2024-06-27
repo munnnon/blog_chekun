@@ -7,7 +7,6 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-use App\Service\CommentServiceInterface;
 use App\Form\Type\PostType;
 use App\Repository\CommentRepository;
 use App\Service\PostServiceInterface;
@@ -17,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -30,12 +28,10 @@ class PostController extends AbstractController
     /**
      * Constructor.
      *
-     * @param PostServiceInterface    $postService    Post service
-     * @param TranslatorInterface     $translator     Translator
-     * @param Security                $security       Security
-     * @param CommentServiceInterface $commentService Comment Service
+     * @param PostServiceInterface $postService Post service
+     * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(private readonly PostServiceInterface $postService, private readonly TranslatorInterface $translator, private readonly Security $security, private readonly CommentServiceInterface $commentService)
+    public function __construct(private readonly PostServiceInterface $postService, private readonly TranslatorInterface $translator)
     {
     }
 
@@ -205,25 +201,5 @@ class PostController extends AbstractController
                 'post' => $post,
             ]
         );
-    }
-
-    /**
-     * Getter for Security.
-     *
-     * @return Security Security
-     */
-    public function getSecurity(): Security
-    {
-        return $this->security;
-    }
-
-    /**
-     * Getter for CommentServiceInterface.
-     *
-     * @return CommentServiceInterface Comment Service Interface
-     */
-    public function getCommentService(): CommentServiceInterface
-    {
-        return $this->commentService;
     }
 }

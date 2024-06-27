@@ -190,9 +190,13 @@
                 <source>message.form_error</source>
                 <target>Błąd formularza.</target>
             </trans-unit>
-            <trans-unit id="message.sign_in">
-                <source>message.sign_in</source>
-                <target>Zaloguj się.</target>
+            <trans-unit id="title.sign_in">
+                <source>title.sign_in</source>
+                <target>Zaloguj się</target>
+            </trans-unit>
+            <trans-unit id="action.sign_in">
+                <source>action.sign_in</source>
+                <target>Zaloguj się</target>
             </trans-unit>
             <trans-unit id="label.password">
                 <source>label.password</source>
@@ -205,6 +209,18 @@
             <trans-unit id="action.category_list">
                 <source>action.category_list</source>
                 <target>Lista kategorii</target>
+            </trans-unit>
+            <trans-unit id="title.post_create">
+                <source>title.post_create</source>
+                <target> Tworzenie nowego postu </target>
+            </trans-unit>
+            <trans-unit id="label.none">
+                <source>label.none</source>
+                <target>Żadna</target>
+            </trans-unit>
+            <trans-unit id="action.post_list">
+                <source>action.post_list</source>
+                <target> Lista postów </target>
             </trans-unit>
         </body>
     </file>
