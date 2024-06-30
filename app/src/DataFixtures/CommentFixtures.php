@@ -3,6 +3,7 @@
 /**
  * CommentFixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
@@ -15,8 +16,6 @@ class CommentFixtures extends AbstractBaseFixtures implements DependentFixtureIn
 {
     /**
      * Load data.
-     *
-     * @return void
      */
     public function loadData(): void
     {

@@ -36,7 +36,7 @@ class UserController extends AbstractController
      * @param int                         $id             User index
      * @param Request                     $request        Request
      * @param UserPasswordHasherInterface $passwordHasher Password hasher
-     * @param EntityManagerInterface      $em
+     * @param EntityManagerInterface      $em             Entity Manager
      *
      * @return RedirectResponse|Response HTTP Response
      */
@@ -112,7 +112,7 @@ class UserController extends AbstractController
      *
      * @param int                    $id      User index
      * @param Request                $request Request
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $em      Entity Manager
      *
      * @return RedirectResponse|Response HTTP Response
      */

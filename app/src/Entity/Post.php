@@ -97,11 +97,11 @@ class Post
     /**
      * Setter for Title.
      *
-     * @param string $title Title
+     * @param string|null $title Title
      *
      * @return $this New Title
      */
-    public function setTitle(string $title): static
+    public function setTitle(?string $title): static
     {
         $this->title = $title;
 
@@ -121,11 +121,11 @@ class Post
     /**
      * Setter for Content.
      *
-     * @param string $content Content
+     * @param string|null $content Content
      *
      * @return $this New content
      */
-    public function setContent(string $content): static
+    public function setContent(?string $content): static
     {
         $this->content = $content;
 

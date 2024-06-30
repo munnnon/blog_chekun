@@ -3,6 +3,7 @@
 /**
  * CategoryFixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
@@ -14,8 +15,6 @@ class CategoryFixtures extends AbstractBaseFixtures
 {
     /**
      * Load data.
-     *
-     * @return void
      */
     public function loadData(): void
     {

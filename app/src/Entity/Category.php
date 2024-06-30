@@ -58,11 +58,11 @@ class Category
     /**
      * Setter for Name.
      *
-     * @param string $name Name
+     * @param string|null $name Name
      *
      * @return $this
      */
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 

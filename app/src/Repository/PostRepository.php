@@ -87,7 +87,6 @@ class PostRepository extends ServiceEntityRepository
         return $queryBuilder ?? $this->createQueryBuilder('post');
     }
 
-
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

@@ -2,6 +2,7 @@
 /**
  * User Fixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Enum\UserRole;

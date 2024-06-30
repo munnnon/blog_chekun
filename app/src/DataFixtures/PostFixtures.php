@@ -2,6 +2,7 @@
 /**
  * Post Fixtures.
  */
+
 namespace App\DataFixtures;
 
 use App\Entity\Category;
