@@ -230,6 +230,14 @@
                 <source>action.log_out</source>
                 <target>Log out</target>
             </trans-unit>
+            <trans-unit id="messages.created_successfully">
+                <source>messages.created_successfully</source>
+                <target>Created successfully.</target>
+            </trans-unit>
+            <trans-unit id="title.post_delete">
+                <source>title.post_delete</source>
+                <target> Delete post </target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

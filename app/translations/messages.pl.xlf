@@ -230,6 +230,14 @@
                 <source>action.log_out</source>
                 <target>wylogować się</target>
             </trans-unit>
+            <trans-unit id="messages.created_successfully">
+                <source>messages.created_successfully</source>
+                <target>Utworzono pomyślnie.</target>
+            </trans-unit>
+            <trans-unit id="title.post_delete">
+                <source>title.post_delete</source>
+                <target> Usunięcie postu </target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

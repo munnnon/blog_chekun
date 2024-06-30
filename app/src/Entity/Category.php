@@ -38,7 +38,7 @@ class Category
     /**
      * Getter for Id.
      *
-     * @return int|null
+     * @return int|null Return integer or null
      */
     public function getId(): ?int
     {
@@ -48,7 +48,7 @@ class Category
     /**
      * Getter for Name.
      *
-     * @return string|null
+     * @return string|null Return string or null
      */
     public function getName(): ?string
     {

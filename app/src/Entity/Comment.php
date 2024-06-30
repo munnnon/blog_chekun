@@ -81,7 +81,7 @@ class Comment
     /**
      * Getter for Id.
      *
-     * @return int|null
+     * @return int|null Return integer or null
      */
     public function getId(): ?int
     {
@@ -91,7 +91,7 @@ class Comment
     /**
      * Getter for Content.
      *
-     * @return string|null
+     * @return string|null Return string or null
      */
     public function getContent(): ?string
     {
@@ -115,7 +115,7 @@ class Comment
     /**
      * Getter for created at.
      *
-     * @return \DateTimeImmutable|null
+     * @return \DateTimeImmutable|null Return DateTimeImmutable or null
      */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -139,7 +139,7 @@ class Comment
     /**
      * Getter for Post.
      *
-     * @return Post|null
+     * @return Post|null Return Post or null
      */
     public function getPost(): ?Post
     {
@@ -163,7 +163,7 @@ class Comment
     /**
      * Getter for User.
      *
-     * @return user|null
+     * @return user|null Return user or null
      */
     public function getUser(): ?user
     {
@@ -187,7 +187,7 @@ class Comment
     /**
      * Getter for Nickname.
      *
-     * @return string|null
+     * @return string|null Return string or null
      */
     public function getNickname(): ?string
     {
@@ -211,7 +211,7 @@ class Comment
     /**
      * Getter for Email.
      *
-     * @return string|null
+     * @return string|null Return string or null
      */
     public function getEmail(): ?string
     {

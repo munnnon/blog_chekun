@@ -135,7 +135,7 @@ class Post
     /**
      * Getter for Created At.
      *
-     * @return \DateTimeImmutable|null
+     * @return \DateTimeImmutable|null Return DateTimeImmutable or null
      */
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -207,7 +207,7 @@ class Post
     /**
      * Getter for Category.
      *
-     * @return Category|null
+     * @return Category|null Return Category or null
      */
     public function getCategory(): ?Category
     {
